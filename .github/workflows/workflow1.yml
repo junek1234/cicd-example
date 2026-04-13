@@ -3,8 +3,8 @@ name: CI Pipeline (DOC1)
 on:
   # Manually trigger workflow runs
   workflow_dispatch:
-  
-  # Trigger the workflow on push from the primary branch names
+
+  # Trigger the workflow on push from the main branch
   push:
     branches: [ master ]
 
@@ -18,8 +18,13 @@ jobs:
     # Job's steps
     steps:
       # Check-out your repository
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: To Show Error
+        run: |
+          echo "Should fail at this point ..."
+          exit 1
 
       - name: Run a one-line script
         run: echo "Continuous Integration"

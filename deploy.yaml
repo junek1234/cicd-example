@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicd-example
+  labels:
+    app: cicd-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cicd-example
+  template:
+    metadata:
+      name: cicd-example
+      labels:
+        app: cicd-example
+    spec:
+      containers:
+        - name: cicd-example
+          image: local/cicd-example:latest # Image that will be used inside the container
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080 # The port that the container is running on
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cicd-example
+  labels:
+    app: cicd-example
+spec:
+  type: NodePort
+  selector:
+    app: cicd-example
+  ports:
+    - name: http
+      port: 8080       # The port the service exposes
+      targetPort: 8080 # The port on the container to forward to

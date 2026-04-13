@@ -4,9 +4,9 @@ on:
   # Manually trigger workflow runs
   workflow_dispatch:
   
-  # Trigger the workflow on push from the main branch
+  # Trigger the workflow on push from the primary branch names
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   # Build job
